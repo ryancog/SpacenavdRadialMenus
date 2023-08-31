@@ -1,7 +1,7 @@
 # SpacenavdRadialMenus
 
 Radial Menus for use with spacenavd (and optionally Fusion360 under Wine specifically)
-[!img](/SpacenavdRadialMenus/spacenavd-radial-menus/resources/spacenavd.svg)
+[!img](/spacenavd-radial-menus/resources/spacenavd.svg)
 
 ## Requirements
 
