@@ -1,4 +1,0 @@
-/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build/CMakeFiles/spacenavd-radial-menus.dir
-/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build/CMakeFiles/edit_cache.dir
-/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build/CMakeFiles/rebuild_cache.dir
-/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build/CMakeFiles/spacenavd-radial-menus_autogen.dir
