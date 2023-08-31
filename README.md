@@ -11,7 +11,8 @@ Allows activation of radial menus by pressing side buttons on SpaceMouse devices
 1. Spacenavd must be installed and running
 1. `libspnav` must be installed
 1. `libXtst` must be installed
-1. QtCreator must be installed to build program and configure menu mappings (config file to-do)
+1. ~~QtCreator must be installed to build program and configure menu mappings (config file to-do)~~
+   - QtCreator isn't technically needed, just several Qt dependencies/libs. (Which specifically I'm unsure)
 1. Should work with SpaceMouse devices with 2 buttons (support for additional buttons to-do)
 
 ## Installation/Usage
@@ -20,8 +21,9 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 
 1. Clone the repository: `cd && git clone https://github.com/ryryog25/SpacenavdRadialMenus.git`
 
-1. Open the `spacenavd-radial-menus` project with QtCreator: 
-	Under "Source Files," open `main.cpp`
+~~1. Open the `spacenavd-radial-menus` project with QtCreator:~~ 
+
+1. Open `main.cpp`
 	
 	At the very top of `main()` are two structs `leftActions` and `rightActions` which contain the configuration for the Radial Menus, and for each struct is an entry for each menu slice (`.top`, `.bottom`, `.left`, `.right`)
 
@@ -29,7 +31,15 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 	- `.keystroke` is used when running w/o any arguments, and is a string of keysyms to be executed, seperated by `+` (though only intended for modifiers plus a key due to the way the keys get pressed) The keys are pressed in something of a clamshell order. That is, the first key will be the first pressed and last released (the second key the second pressed and second to last released, etc.), so that it is pressed for the duration of the rest of the keystrokes.
 	- `fusionAction`s are specifically intended for running with the `--fusion360` argument and the Fusion 360 Add-In. These are Fusion API command IDs to be used to execute the respective command when the respective radial menu option is pressed. A list of these commands can be found in repository (`FusionCommands.txt`). The first string is the command name, and the second is the command ID, which would be used in `.fusionAction`.
 
-1. Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`
+~~1. Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
+
+1. Build with:
+
+```
+mkdir build && cd build
+cmake ..
+make
+```
 
 1. Copy the executable: `sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/`
 
