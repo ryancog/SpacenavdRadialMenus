@@ -1,6 +1,7 @@
 #include "widget.h"
 
 #include <QApplication>
+#include <QSystemSemaphore>
 #include <QDebug>
 #include <chrono>
 #include <thread>
@@ -14,14 +15,19 @@ extern "C" {
 using std::to_string;
 
 pollfd* fusionSetup();
+bool checkArg(string arg, int argc, char* args[]);
 
 int main(int argc, char *argv[])
 {
-    daemon(0, 1);
+    QApplication a(argc, argv);
+    if (!checkArg("--no-daemon", argc, argv)) {
+        daemon(0, 1);
+        std::cout << "Running as daemon..." << std::endl;
+    }
+
     bool isFusion = false;
     pollfd* fusionfd = nullptr;
 
-    QApplication a(argc, argv);
     Widget::ButtonActions leftActions = {
         .top = {
             .name         = "Extrude",
@@ -69,7 +75,7 @@ int main(int argc, char *argv[])
     };
 
 
-    if (argc >= 2 && !strcmp(argv[1], "--fusion360")) {
+    if (checkArg("--fusion360", argc, argv)) {
         isFusion = true;
         if ((fusionfd = fusionSetup()) == nullptr) {
             return -1;
@@ -96,18 +102,15 @@ int main(int argc, char *argv[])
                             cLoc.x() + (lMenu.width() / 2),
                             cLoc.y() + (lMenu.height() /2)
                             );
-                menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
                 menus[sev.button.bnum]->activateWindow();
                 menus[sev.button.bnum]->raise();
-                menus[sev.button.bnum]->activateWindow();
                 menus[sev.button.bnum]->show();
                 a.exec();
                 spnav_remove_events(SPNAV_EVENT_BUTTON);
             }
         }
     } else {
-        printf("Failed to connect to spacenavd, exiting...");
-        fflush(stdout);
+        std::cout << "Failed to connect to spacenavd, exiting..." << std::endl;
     }
 
     spnav_close();
@@ -152,4 +155,15 @@ pollfd* fusionSetup() {
     pollfd.events = POLLIN;
 
     return &pollfd;
+}
+
+bool checkArg(string _arg, int argc, char* args[]) {
+    const char* arg = _arg.c_str();
+    for (int lp = 1; lp < argc; lp++) {
+        if (!strcmp(arg, args[lp])) {
+            return true;
+        }
+    }
+
+    return false;
 }

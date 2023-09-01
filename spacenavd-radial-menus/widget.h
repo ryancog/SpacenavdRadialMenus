@@ -8,6 +8,7 @@
 #include <QThread>
 #include <QDebug>
 #include <QString>
+#include <QTimer>
 
 #include <netinet/in.h>
 #include <sys/un.h>
@@ -41,16 +42,23 @@ private:
 
     class RButton {
     public:
-        QPushButton* qButton;
-        ButtonAction actions;
+        QPushButton* qButton = nullptr;
+        ButtonAction actions = {};
+        QTimer* pressTimer = new QTimer();
         QPixmap mask;
         QRect geometry;
     };
 
-    void m_handleButton(RButton*);
+    enum class ButtonStates {
+        BUTTON_PRESSED,
+        BUTTON_RELEASED
+    };
+
+    void m_handleButton(RButton*, ButtonStates);
     void m_sendKeystroke(string);
     void m_sendFusionAction(string);
     void m_initButton(RButton*);
+    void m_appClose();
     void changeEvent(QEvent *event);
 
     bool isFusion;

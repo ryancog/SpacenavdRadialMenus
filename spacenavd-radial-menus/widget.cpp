@@ -51,14 +51,22 @@ void Widget::changeEvent(QEvent *event) {
     }
 }
 
-void Widget::m_handleButton(RButton *button) {
-    close();
-    if (button->qButton == centerButton.qButton) { return; }
+void Widget::m_handleButton(RButton *button, ButtonStates state) {
+    switch (state) {
+    case ButtonStates::BUTTON_RELEASED:
+        button->pressTimer->stop();
+        close();
+        if (button->qButton == centerButton.qButton) { return; }
 
-    if (isFusion) {
-        m_sendFusionAction(button->actions.fusionAction);
-    } else {
-        m_sendKeystroke(button->actions.keystroke);
+        if (isFusion) {
+            m_sendFusionAction(button->actions.fusionAction);
+        } else {
+            m_sendKeystroke(button->actions.keystroke);
+        }
+        break;
+    case ButtonStates::BUTTON_PRESSED:
+        button->pressTimer->start(5000);
+        break;
     }
 }
 
@@ -99,6 +107,7 @@ void Widget::m_sendKeystroke(string _keystroke) {
     }
 }
 
+
 void Widget::m_initButton(RButton* button) {
     button->qButton = new QPushButton(QString::fromLocal8Bit(button->actions.name.c_str()), this);
     button->qButton->setGeometry(button->geometry);
@@ -110,7 +119,15 @@ void Widget::m_initButton(RButton* button) {
                 );
     button->qButton->setFont(QFont("Ubuntu", 12));
 
-    connect(button->qButton, &QPushButton::released, this, [=]{ Widget::m_handleButton(button); });
+    if (button->qButton == centerButton.qButton) {
+        button->pressTimer->setSingleShot(true);
+        connect(button->pressTimer, &QTimer::timeout, this, []() {
+            exit(0);
+        });
+
+        connect(button->qButton, &QPushButton::pressed, this, [=]{ Widget::m_handleButton(button, ButtonStates::BUTTON_PRESSED); });
+    }
+    connect(button->qButton, &QPushButton::released, this, [=]{ Widget::m_handleButton(button, ButtonStates::BUTTON_RELEASED); });
 }
 
 Widget::~Widget()
