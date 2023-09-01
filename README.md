@@ -18,7 +18,8 @@ Allows activation of radial menus by pressing side buttons on SpaceMouse devices
 ## Usage
 
 1. Ensure `spacenavd` is running, then run `spacenavd-radial-menus` from a shell. (The shell can be closed after the command is executed)
-   Currently two arguments are supported:
+
+Currently two arguments are supported:
     - `--fusion360` to connect to Fusion 360 Plugin and send Fusion Commands
     - --no-daemon` to keep the program running tethered to the current shell
 
