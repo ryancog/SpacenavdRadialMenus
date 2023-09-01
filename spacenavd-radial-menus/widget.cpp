@@ -64,6 +64,7 @@ void Widget::m_handleButton(RButton *button, ButtonStates state) {
             m_sendKeystroke(button->actions.keystroke);
         }
         break;
+
     case ButtonStates::BUTTON_PRESSED:
         button->pressTimer->start(5000);
         break;
