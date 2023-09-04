@@ -45,7 +45,7 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 
 1. Clone the repository: `cd && git clone https://github.com/ryryog25/SpacenavdRadialMenus.git`
 
-~~1. Open the `spacenavd-radial-menus` project with QtCreator:~~ 
+1. ~~Open the `spacenavd-radial-menus` project with QtCreator:~~ 
 
 1. Open `main.cpp`
 	
@@ -55,7 +55,7 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 	- `.keystroke` is used when running w/o any arguments, and is a string of keysyms to be executed, seperated by `+` (though only intended for modifiers plus a key due to the way the keys get pressed) The keys are pressed in something of a clamshell order. That is, the first key will be the first pressed and last released (the second key the second pressed and second to last released, etc.), so that it is pressed for the duration of the rest of the keystrokes.
 	- `fusionAction`s are specifically intended for running with the `--fusion360` argument and the Fusion 360 Add-In. These are Fusion API command IDs to be used to execute the respective command when the respective radial menu option is pressed. A list of these commands can be found in repository (`FusionCommands.txt`). The first string is the command name, and the second is the command ID, which would be used in `.fusionAction`.
 
-~~1. Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
+1. ~~Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
 
 1. Build with:
 
