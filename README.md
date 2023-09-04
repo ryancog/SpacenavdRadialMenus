@@ -15,7 +15,29 @@ Allows activation of radial menus by pressing side buttons on SpaceMouse devices
    - QtCreator isn't technically needed, just several Qt dependencies/libs. (Which specifically I'm unsure)
 1. Should work with SpaceMouse devices with 2 buttons (support for additional buttons to-do)
 
-## Installation/Usage
+## Usage
+
+1. Ensure `spacenavd` is running, then run `spacenavd-radial-menus` from a shell. (The shell can be closed after the command is executed)
+
+1. To close, open either radial menu and hold "close" for 5 seconds.
+
+Currently two arguments are supported:
+- `--fusion360` to connect to Fusion 360 Plugin and send Fusion Commands
+- `--no-daemon` to keep the program running tethered to the current shell
+
+### Fusion 360
+
+1. Copy Add-In folder (`Fusion-SpacenavdRadialMenus`) to your wine prefix in `C:\\users\USERNAME\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\`
+
+1. Restart Fusion if currently open
+
+1. Run `spacenavd-radial-menus --fusion360` (Shell can be closed after execution)
+
+1. Open the AddIns window under Utilities in Fusion360, and run `SpacenavdRadialMenus`
+
+1. Profit
+
+## Installation
 
 TODO: Create a `install.sh` (and `uninstall.sh`)
 
@@ -44,20 +66,6 @@ make
 1. Copy the executable: `sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/`
 
 1. Copy resources `sudo mkdir /usr/local/share/spacenavd-radial-menus && sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/`
-
-1. Ensure `spacenavd` is running, then run `spacenavd-radial-menus` from a shell. (The shell can be closed after the command is executed)
-
-## Fusion 360
-
-1. Copy Add-In folder (`Fusion-SpacenavdRadialMenus`) to your wine prefix in `C:\\users\USERNAME\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\`
-
-1. Restart Fusion if currently open
-
-1. Run `spacenavd-radial-menus --fusion360` (Shell can be closed after execution)
-
-1. Open the AddIns window under Utilities in Fusion360, and run `SpacenavdRadialMenus`
-
-1. Profit
 
 ## Acknowledgements
 
