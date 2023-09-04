@@ -66,7 +66,7 @@ void Widget::m_handleButton(RButton *button, ButtonStates state) {
         break;
 
     case ButtonStates::BUTTON_PRESSED:
-        button->pressTimer->start(5000);
+        button->pressTimer->start(3000);
         break;
     }
 }

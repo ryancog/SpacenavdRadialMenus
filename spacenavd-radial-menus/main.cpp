@@ -22,8 +22,6 @@ bool checkArg(string arg, int argc, char* args[]);
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-
     if (!checkArg("--no-daemon", argc, argv)) {
         daemon(1, 0);
         freopen("/var/log/spacenavd-radial-menus.log", "w", stdout);
@@ -88,6 +86,8 @@ int main(int argc, char *argv[])
         }
     }
 
+    QApplication a(argc, argv);
+    a.setWindowIcon(QIcon("/usr/local/share/spacenavd-radial-menus/resources/spacenavd.svg"));
     Widget lMenu(nullptr, leftActions, isFusion, fusionfd);
     Widget rMenu(nullptr, rightActions, isFusion, fusionfd);
     Widget* menus[2] = {
