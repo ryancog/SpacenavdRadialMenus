@@ -17,6 +17,8 @@ Allows activation of radial menus by pressing side buttons on SpaceMouse devices
 
 ## Usage
 
+**For reasons I've not yet looked into running the app as a daemon seems to have broken. For now always run with `--no-daemon`**
+
 1. Ensure `spacenavd` is running, then run `spacenavd-radial-menus` from a shell. (The shell can be closed after the command is executed)
 
 1. To close, open either radial menu and hold "close" for 5 seconds.
