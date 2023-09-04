@@ -58,12 +58,11 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 1. ~~Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
 
 1. Build with:
-
-```
-mkdir build && cd build
-cmake ..
-make
-```
+	```
+	mkdir build && cd build
+	cmake ..
+	make
+	```
 
 1. Copy the executable: `sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/`
 
