@@ -7,6 +7,9 @@
 #include <thread>
 #include <string>
 #include <iostream>
+#include <fstream>
+
+#define LOG(msg) std::cout << msg << std::endl;
 
 extern "C" {
 #include <spnav.h>
@@ -20,9 +23,11 @@ bool checkArg(string arg, int argc, char* args[]);
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
     if (!checkArg("--no-daemon", argc, argv)) {
         daemon(0, 1);
-        std::cout << "Running as daemon..." << std::endl;
+        freopen("/var/log/spacenavd-radial-menus.log", "w", stdout);
+        LOG("Running as daemon...");
     }
 
     bool isFusion = false;
@@ -78,6 +83,7 @@ int main(int argc, char *argv[])
     if (checkArg("--fusion360", argc, argv)) {
         isFusion = true;
         if ((fusionfd = fusionSetup()) == nullptr) {
+            LOG("Could not establish connection to Fusion360");
             return -1;
         }
     }
@@ -110,7 +116,7 @@ int main(int argc, char *argv[])
             }
         }
     } else {
-        std::cout << "Failed to connect to spacenavd, exiting..." << std::endl;
+        LOG("Failed to connect to spacenavd, exiting...");
     }
 
     spnav_close();
@@ -119,11 +125,11 @@ int main(int argc, char *argv[])
 
 // Sets up fusionfd and returns pointer to fd object
 pollfd* fusionSetup() {
-    std::cout <<  "Initializing connection to Fusion360..." << std::endl;
+    LOG("Initializing connection to Fusion360...");
 
     int listenfd = socket(AF_INET, SOCK_STREAM, 0);
     if (listenfd < 0) {
-        std::cout << "Could not create socket, exiting..." << std::endl;
+        LOG("Could not create socket, exiting...");
         return nullptr;
     }
 
@@ -145,10 +151,10 @@ pollfd* fusionSetup() {
 
     int fusionfd;
 
-    std::cout << "Waiting for connection..." << std::endl;
+    LOG("Waiting for connection...");
     while ((fusionfd = accept(listenfd, (struct sockaddr*)NULL, NULL)) < 0) {}
 
-    std::cout << "Connection Accepted." << std::endl;
+    LOG("Connection Accepted.");
 
     static struct pollfd pollfd;
     pollfd.fd = fusionfd;
