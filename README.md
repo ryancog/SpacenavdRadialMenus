@@ -74,13 +74,13 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 - Window focus can be tempermental on Wayland
 	- The following workaround seems to work on Wayland, but has reportedly caused issues with other DEs:
  	- Replace lines `111-113` in `main.cpp()` with the following:
- 		```
-   		menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
-                menus[sev.button.bnum]->activateWindow();
-                menus[sev.button.bnum]->raise();
-                menus[sev.button.bnum]->activateWindow();
-                menus[sev.button.bnum]->show();
-		```
+ 	```
+	menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
+	menus[sev.button.bnum]->activateWindow();
+	menus[sev.button.bnum]->raise();
+	menus[sev.button.bnum]->activateWindow();
+	menus[sev.button.bnum]->show();
+	```
 
 ## Acknowledgements
 
