@@ -68,6 +68,20 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 
 1. Copy resources `sudo mkdir /usr/local/share/spacenavd-radial-menus && sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/`
 
+## Known Issues
+
+- Polling spacenavd is done seperately from Qt event handler
+- Window focus can be tempermental on Wayland
+	- The following workaround seems to work on Wayland, but has reportedly caused issues with other DEs:
+ 	- Replace lines `111-113` in `main.cpp()` with the following:
+ 		```
+   		menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
+                menus[sev.button.bnum]->activateWindow();
+                menus[sev.button.bnum]->raise();
+                menus[sev.button.bnum]->activateWindow();
+                menus[sev.button.bnum]->show();
+		```
+
 ## Acknowledgements
 
 - Thanks to BrianEkins on the Fusion360 forums for his explanation of the Fusion API where Autodesk's documentation left much to be desired.
