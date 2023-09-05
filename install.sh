@@ -18,4 +18,4 @@ sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-men
 
 sudo mkdir /usr/local/share/spacenavd-radial-menus && sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/
 
-echo << "Spacenavd Radial Menus can now be started via `spacenavd-radial-menus [args]`"
+echo -e "Spacenavd Radial Menus can now be started via \e[31mspacenavd-radial-menus [args]"
