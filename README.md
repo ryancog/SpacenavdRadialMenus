@@ -72,7 +72,7 @@ In the event you wish to change button mappings, run the following command to re
 - Polling spacenavd is done seperately from Qt event handler
 - Window focus can be tempermental on Wayland
 	- The following workaround seems to work on Wayland, but has reportedly caused issues with other DEs:
- 	1. Replace lines `111-113` in `main.cpp()` with the following:
+ 		- Replace lines `111-113` in `main.cpp()` with the following:
  	```
 	menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
 	menus[sev.button.bnum]->activateWindow();
