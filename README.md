@@ -42,7 +42,7 @@ Logging while running normally (not with `--no-daemon`) can be accessed at `/var
 ## Installation
 
 1. Run the following command in your terminal (You will be asked for your password for file manipulation):
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ryryog25/SpacenavdRadialMenus/main/install.sh)"`
+- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ryryog25/SpacenavdRadialMenus/main/install.sh)"`
 
 1. `config.h` will be opened to edit:
 	
