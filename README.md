@@ -23,6 +23,7 @@ Allows activation of radial menus by pressing side buttons on SpaceMouse devices
 
 Currently two arguments are supported:
 - `--fusion360` to connect to Fusion 360 Plugin and send Fusion Commands
+	- If no connection is established within 15 seconds, `spacenavd-radial-menus` will exit.
 - `--no-daemon` to keep the program running tethered to the current shell
 
 Logging while running normally (not with `--no-daemon`) can be accessed at `/var/log/spacenavd-radial-menus.log`
@@ -47,13 +48,15 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 
 1. ~~Open the `spacenavd-radial-menus` project with QtCreator:~~ 
 
-1. Open `main.cpp`
+1. Open `config.h`
 	
-	At the very top of `main()` are two structs `leftActions` and `rightActions` which contain the configuration for the Radial Menus, and for each struct is an entry for each menu slice (`.top`, `.bottom`, `.left`, `.right`)
+	In `config.h` is an array with actions for each mouse button with entries for each menu slice (`.top`, `.bottom`, `.left`, `.right`)
 
 	- The `.name` is fairly straightforward, this will be the name which appears on the menu item itself when the radial menu is opened.
 	- `.keystroke` is used when running w/o any arguments, and is a string of keysyms to be executed, seperated by `+` (though only intended for modifiers plus a key due to the way the keys get pressed) The keys are pressed in something of a clamshell order. That is, the first key will be the first pressed and last released (the second key the second pressed and second to last released, etc.), so that it is pressed for the duration of the rest of the keystrokes.
 	- `fusionAction`s are specifically intended for running with the `--fusion360` argument and the Fusion 360 Add-In. These are Fusion API command IDs to be used to execute the respective command when the respective radial menu option is pressed. A list of these commands can be found in repository (`FusionCommands.txt`). The first string is the command name, and the second is the command ID, which would be used in `.fusionAction`.
+
+	Additional buttons can be configured (for e.g. the SpaceMouse Enterprise) via adding entries to this array. Each new entry represents another button, and the button numbering convention is derived from `spacenavd`, and will be the same. For example, the default config has two structs, the first being for button 0, the second for button 1.
 
 1. ~~Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
 
