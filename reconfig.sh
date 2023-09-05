@@ -15,6 +15,9 @@ cd build
 cmake .. > /dev/null
 make > /dev/null
 
+echo "Killing spacenave-radial-menus, if open..."
+sudo killall spacenavd-radial-menus
+
 echo "Copying executable..."
 sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/
 
