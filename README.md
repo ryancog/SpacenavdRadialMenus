@@ -60,7 +60,7 @@ Logging while running normally (not with `--no-daemon`) can be accessed at `/var
 ## Reconfiguring
 
 In the event you wish to change button mappings, run the following command to re-configure `spacenavd-radial-menus` and reinstall:
-`~/SpacenavdRadialMenus/reconfig.sh`
+- `~/SpacenavdRadialMenus/reconfig.sh`
 
 ## Uninstall
 
