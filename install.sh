@@ -22,6 +22,7 @@ echo "Copying executable..."
 sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/
 
 echo "Copying resources..."
-sudo mkdir /usr/local/share/spacenavd-radial-menus && sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/
+sudo mkdir /usr/local/share/spacenavd-radial-menus
+sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/
 
 echo -e "Spacenavd Radial Menus can now be started via \e[32mspacenavd-radial-menus [args]"

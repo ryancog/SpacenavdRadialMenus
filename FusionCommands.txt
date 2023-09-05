@@ -1191,9 +1191,9 @@ Select Similar Occurrences, SimSelectSimilarOccurrencesCommand
 Select By Name, SimSelectByNameCommand
 Switch and check Interference, SimSwitchToFusionAndRunInterferencesCommand
 Alert, SimAttributesAlertCommand
-Send Study to Ansys® Mechanical™, SimExportToMechanicalCommand
-Send Study to Ansys® Discovery™, SimExportToDiscoveryCommand
-Export Study to Ansys® Setup, SimExportToScalarisCommand
+Send Study to Ansys\AE Mechanical\99, SimExportToMechanicalCommand
+Send Study to Ansys\AE Discovery\99, SimExportToDiscoveryCommand
+Export Study to Ansys\AE Setup, SimExportToScalarisCommand
 Solve Details, SimSolveDetailsCmd
 Generate Details, GenGenerateDetailsCmd
 Hide Generate Details, GenHideGenerateDetailsCmd
