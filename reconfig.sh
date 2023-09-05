@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -f "/usr/local/bin/spacenavd-radial-menus" ]; then
+	echo "Spacenavd Radial Menus not installed, exiting..."
+	exit 0;
+fi
 
 echo "Opening Fusion Command List..."
 xdg-open https://raw.githubusercontent.com/ryryog25/SpacenavdRadialMenus/main/FusionCommands.txt

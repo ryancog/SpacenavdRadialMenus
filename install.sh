@@ -1,6 +1,12 @@
 #!/bin/bash 
 
 cd
+
+if [ -f "/usr/local/bin/spacenavd-radial-menus" ]; then
+	echo "SpacenavdRadialMenus is already installed, exiting..."
+	exit 0;
+fi
+
 echo "Installing dependencies..."
 sudo apt-get -y install git libxtst-dev > /dev/null # There's a lot that should be in this list...
 git clone --quiet https://github.com/ryryog25/SpacenavdRadialMenus.git > /dev/null
