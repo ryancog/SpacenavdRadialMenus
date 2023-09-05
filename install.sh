@@ -2,8 +2,8 @@
 
 cd
 echo "Installing dependencies...\n"
-sudo apt-get -y install git libxtst-dev # There's a lot that should be in this list...
-git clone https://github.com/ryryog25/SpacenavdRadialMenus.git
+sudo apt-get -y install git libxtst-dev > /dev/null # There's a lot that should be in this list...
+git clone https://github.com/ryryog25/SpacenavdRadialMenus.git > /dev/null
 
 echo "Opening Fusion Command List...\n"
 xdg-open https://raw.githubusercontent.com/ryryog25/SpacenavdRadialMenus/main/FusionCommands.txt
