@@ -1,19 +1,18 @@
 # SpacenavdRadialMenus
 
+
+![image](/spacenavd-radial-menus/resources/spacenavd.svg)
+
 Radial Menus for use with spacenavd (and optionally Fusion360 under Wine specifically)
 
 Allows activation of radial menus by pressing side buttons on SpaceMouse devices
-
-![image](/spacenavd-radial-menus/resources/spacenavd.svg)
 
 ## Requirements
 
 1. Spacenavd must be installed and running
 1. `libspnav` must be installed
 1. `libXtst` must be installed
-1. ~~QtCreator must be installed to build program and configure menu mappings (config file to-do)~~
-   - QtCreator isn't technically needed, just several Qt dependencies/libs. (Which specifically I'm unsure)
-1. Should work with SpaceMouse devices with 2 buttons (support for additional buttons to-do)
+1. Several Qt dependencies/libs. (Which specifically I'm unsure, if someone with a clean install can test this and let me know, would be appreciated)
 
 ## Usage
 
@@ -32,7 +31,7 @@ Logging while running normally (not with `--no-daemon`) can be accessed at `/var
 
 1. Copy Add-In folder (`Fusion-SpacenavdRadialMenus`) to your wine prefix in `C:\\users\USERNAME\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns\`
 
-1. Restart Fusion if currently open
+1. Restart Fusion360 if currently open
 
 1. Run `spacenavd-radial-menus --fusion360` (Shell can be closed after execution)
 
@@ -42,13 +41,10 @@ Logging while running normally (not with `--no-daemon`) can be accessed at `/var
 
 ## Installation
 
-TODO: Create a `install.sh` (and `uninstall.sh`)
+1. Run the following command in your terminal (You will be asked for your password for file manipulation):
+	- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ryryog25/SpacenavdRadialMenus/main/install.sh)"`
 
-1. Clone the repository: `cd && git clone https://github.com/ryryog25/SpacenavdRadialMenus.git`
-
-1. ~~Open the `spacenavd-radial-menus` project with QtCreator:~~ 
-
-1. Open `config.h`
+1. `config.h` will be opened to edit:
 	
 	In `config.h` is an array with actions for each mouse button with entries for each menu slice (`.top`, `.bottom`, `.left`, `.right`)
 
@@ -58,32 +54,33 @@ TODO: Create a `install.sh` (and `uninstall.sh`)
 
 	Additional buttons can be configured (for e.g. the SpaceMouse Enterprise) via adding entries to this array. Each new entry represents another button, and the button numbering convention is derived from `spacenavd`, and will be the same. For example, the default config has two structs, the first being for button 0, the second for button 1.
 
-1. ~~Once configuration is done, press the hammer icon in the bottom left hand corner of QtCreator to build `spacenavd-radial-menus`, the compiled executable can be found in `spacenavd-radial-menus/build/spacenavd-radial-menus`~~
+1. Once done configuring, `CTRL+X`, then `Y` to exit and save changes, and the script will continue the installation.
 
-1. Build with:
-	```
-	mkdir build && cd build
-	cmake ..
-	make
-	```
+1. `spacenavd-radial-menus` is now installed and can be run.
 
-1. Copy the executable: `sudo cp ~/SpacenavdRadialMenus/spacenavd-radial-menus/build/spacenavd-radial-menus /usr/local/bin/`
+## Reconfiguring
 
-1. Copy resources `sudo mkdir /usr/local/share/spacenavd-radial-menus && sudo cp -r ~/SpacenavdRadialMenus/spacenavd-radial-menus/resources /usr/local/share/spacenavd-radial-menus/`
+In the event you wish to change button mappings, run the following command to re-configure `spacenavd-radial-menus` and reinstall:
+- `~/SpacenavdRadialMenus/reconfig.sh`
+
+## Uninstall
+
+- `~/SpacenavdRadialMenus/uninstall.sh` to uninstall SpacenavdRadialMenus and cleanup
 
 ## Known Issues
 
 - Polling spacenavd is done seperately from Qt event handler
 - Window focus can be tempermental on Wayland
 	- The following workaround seems to work on Wayland, but has reportedly caused issues with other DEs:
- 	- Replace lines `111-113` in `main.cpp()` with the following:
- 	```
-	menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
-	menus[sev.button.bnum]->activateWindow();
-	menus[sev.button.bnum]->raise();
-	menus[sev.button.bnum]->activateWindow();
-	menus[sev.button.bnum]->show();
-	```
+	 	1. Replace lines `111-113` in `main.cpp()` with the following:
+		 	```
+			menus[sev.button.bnum]->setWindowState(Qt::WindowMinimized);
+			menus[sev.button.bnum]->activateWindow();
+			menus[sev.button.bnum]->raise();
+			menus[sev.button.bnum]->activateWindow();
+			menus[sev.button.bnum]->show();
+			```
+	  	1. See [Reconfiguring](#Reconfiguring) for reinstall.
 
 ## Acknowledgements
 
