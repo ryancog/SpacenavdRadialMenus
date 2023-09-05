@@ -1,12 +1,11 @@
 # SpacenavdRadialMenus
 
-Radial Menus for use with spacenavd (and optionally Fusion360 under Wine specifically)
-
-Allows activation of radial menus by pressing side buttons on SpaceMouse devices
-
 
 ![image](/spacenavd-radial-menus/resources/spacenavd.svg)
 
+Radial Menus for use with spacenavd (and optionally Fusion360 under Wine specifically)
+
+Allows activation of radial menus by pressing side buttons on SpaceMouse devices
 
 ## Requirements
 
