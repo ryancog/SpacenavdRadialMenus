@@ -1,6 +1,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include <QApplication>
 #include <QWidget>
 #include <QWindow>
 #include <QPushButton>
@@ -23,6 +24,9 @@
 #include <string>
 #include <iostream>
 #include <cstring>
+#include <chrono>
+#include <thread>
+#include <fstream>
 
 using std::string;
 

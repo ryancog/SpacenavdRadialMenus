@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2023-08-31T23:05:24. -->
+<!-- Written by QtCreator 6.0.2, 2023-09-04T21:40:46. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -165,11 +165,13 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">spacenavd-radial-menus</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.spacenavd-radial-menus</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">spacenavd-radial-menus</value>
+    <value type="QString" key="RunConfiguration.Arguments">--fusion360 --no-daemon</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build</value>
    </valuemap>

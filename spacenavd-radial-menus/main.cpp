@@ -1,14 +1,5 @@
 #include "widget.h"
 
-#include <QApplication>
-#include <QSystemSemaphore>
-#include <QDebug>
-#include <chrono>
-#include <thread>
-#include <string>
-#include <iostream>
-#include <fstream>
-
 #define LOG(msg) std::cout << msg << std::endl;
 
 extern "C" {
@@ -31,52 +22,7 @@ int main(int argc, char *argv[])
     bool isFusion = false;
     pollfd* fusionfd = nullptr;
 
-    Widget::ButtonActions leftActions = {
-        .top = {
-            .name         = "Extrude",
-            .keystroke    = "E",
-            .fusionAction = "Extrude"
-        },
-        .bottom = {
-            .name         = "Revolve",
-            .keystroke    = "N",
-            .fusionAction = "Revolve"
-        },
-        .left = {
-            .name         = "Chamfer",
-            .keystroke    = "Shift_L+C",
-            .fusionAction = "FusionChamferCommand"
-        },
-        .right = {
-            .name         = "Fillet",
-            .keystroke    = "F",
-            .fusionAction = "FusionFilletEdgesCommand"
-        }
-    };
-
-    Widget::ButtonActions rightActions = {
-        .top = {
-            .name         = "Joint",
-            .keystroke    = "J",
-            .fusionAction = "JointAssembleCmdNew",
-        },
-        .bottom = {
-            .name         = "Measure",
-            .keystroke    = "I",
-            .fusionAction = "MeasureCommand",
-        },
-        .left = {
-            .name         = "Trim",
-            .keystroke    = "T",
-            .fusionAction = "TrimSketchCmd",
-        },
-        .right = {
-            .name         = "Circle",
-            .keystroke    = "C",
-            .fusionAction = "CircleCenterRadius"
-        }
-    };
-
+    #include "config.h"
 
     if (checkArg("--fusion360", argc, argv)) {
         isFusion = true;
@@ -88,12 +34,15 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon("/usr/local/share/spacenavd-radial-menus/resources/spacenavd.svg"));
-    Widget lMenu(nullptr, leftActions, isFusion, fusionfd);
-    Widget rMenu(nullptr, rightActions, isFusion, fusionfd);
-    Widget* menus[2] = {
-        &lMenu,
-        &rMenu
-    };
+
+    Widget* menus[sizeof(actions)/sizeof(actions[0])];
+    {
+        uint8_t menu = 0;
+        for (Widget::ButtonActions action : actions) {
+            menus[menu] = new Widget(nullptr, action, isFusion, fusionfd);
+            menu++;
+        }
+    }
 
     if(spnav_open() !=  -1) {
         spnav_event sev;
@@ -101,18 +50,23 @@ int main(int argc, char *argv[])
         while(!false) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
             if (spnav_poll_event(&sev) == SPNAV_EVENT_BUTTON && sev.button.press == 0) {
-                QPoint cLoc = QCursor::pos();
-                menus[sev.button.bnum]->setGeometry(
-                            cLoc.x() - (lMenu.width() / 2),
-                            cLoc.y() - (lMenu.height() / 2),
-                            cLoc.x() + (lMenu.width() / 2),
-                            cLoc.y() + (lMenu.height() /2)
-                            );
-                menus[sev.button.bnum]->activateWindow();
-                menus[sev.button.bnum]->raise();
-                menus[sev.button.bnum]->show();
-                a.exec();
-                spnav_remove_events(SPNAV_EVENT_BUTTON);
+                if (sev.button.bnum < sizeof(menus) / sizeof(menus[0])) {
+                    QPoint cLoc = QCursor::pos();
+                    menus[sev.button.bnum]->setGeometry(
+                                cLoc.x() - (menus[0]->width() / 2),
+                                cLoc.y() - (menus[0]->height() / 2),
+                                cLoc.x() + (menus[0]->width() / 2),
+                                cLoc.y() + (menus[0]->height() /2)
+                                );
+                    menus[sev.button.bnum]->activateWindow();
+                    menus[sev.button.bnum]->raise();
+                    menus[sev.button.bnum]->show();
+                    a.exec();
+                    spnav_remove_events(SPNAV_EVENT_BUTTON);
+                }
+                else if (sev.button.bnum > sizeof(menus) / sizeof(menus[0])) {
+                    LOG("No Assigned Actions for Button " << sev.button.bnum << ". Ignoring...");
+                }
             }
         }
     } else {
@@ -127,7 +81,7 @@ int main(int argc, char *argv[])
 pollfd* fusionSetup() {
     LOG("Initializing connection to Fusion360...");
 
-    int listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    int listenfd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if (listenfd < 0) {
         LOG("Could not create socket, exiting...");
         return nullptr;
@@ -142,7 +96,7 @@ pollfd* fusionSetup() {
     addr_in.sin_port = htons(/* PORT */ 22222);
 
     if (bind(listenfd, (struct sockaddr*)&addr_in, sizeof(addr_in))) {
-        std::cout << "Could not bind socket, exiting..." << std::endl;
+        LOG("Could not bind socket, exiting...");
         close(listenfd);
         return nullptr;
     }
@@ -152,7 +106,15 @@ pollfd* fusionSetup() {
     int fusionfd;
 
     LOG("Waiting for connection...");
-    while ((fusionfd = accept(listenfd, (struct sockaddr*)NULL, NULL)) < 0) {}
+    const auto start = std::chrono::steady_clock::now();
+    while ((fusionfd = accept(listenfd, (struct sockaddr*)NULL, NULL)) < 0) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
+        if ((std::chrono::duration<double>)(std::chrono::steady_clock::now() - start) > (std::chrono::duration<double>)15) {
+            LOG("Connection timed out.");
+            return nullptr;
+        }
+    }
 
     LOG("Connection Accepted.");
 
