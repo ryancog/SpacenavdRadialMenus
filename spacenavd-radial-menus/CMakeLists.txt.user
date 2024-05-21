@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.2, 2023-09-04T21:40:46. -->
+<!-- Written by QtCreator 6.0.2, 2023-09-12T13:15:26. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{1121992c-e851-4109-ad87-aa978d9f56fa}</value>
+  <value type="QByteArray">{448115e7-853a-4773-a9c5-baeff46a8cfc}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -91,7 +91,7 @@
    <value type="QString" key="DeviceType">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{9240d185-0923-4375-9bae-a75d806f746e}</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{6709520e-34b3-455b-96ad-efef7d6bffc1}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
@@ -104,6 +104,7 @@
 -DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
 -DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}
 -DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}</value>
+    <value type="QString" key="CMake.Source.Directory">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
@@ -165,14 +166,11 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">spacenavd-radial-menus</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.spacenavd-radial-menus</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">spacenavd-radial-menus</value>
-    <value type="QString" key="RunConfiguration.Arguments">--fusion360 --no-daemon</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/ryanogurek/Documents/SpacenavdRadialMenus/spacenavd-radial-menus/build</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>

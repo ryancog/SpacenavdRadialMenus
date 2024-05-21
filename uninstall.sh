@@ -17,4 +17,4 @@ echo "Cleaning up logs..."
 sudo rm /var/log/spacenavd-radial-menus.log 2> /dev/null
 
 echo -e "\nSpacenavdRadialMenus' Fusion360 Add-In must be removed manually if installed.\n(Simply delete the Add-In folder)"
-echo -e "\e[31mSpacenavdRadialMenus has been uninstalled!"
+echo -e "\e[31mSpacenavdRadialMenus has been uninstalled!\e[0m"
