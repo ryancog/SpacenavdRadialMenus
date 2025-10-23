@@ -20,7 +20,7 @@ set(PROJECT_SOURCES
         main.cpp
         widget.cpp
         widget.h
-        widget.ui
+
         config.h
 )
 
